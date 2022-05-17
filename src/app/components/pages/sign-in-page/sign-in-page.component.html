@@ -1,0 +1,45 @@
+<div class="position-relative" style="height: 100vh; width: 100vw">
+  <div class="position-absolute top-50 start-50 translate-middle card p-4 form-width">
+    <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+      <div class="form-floating mb-3 ">
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          id="email"
+          ngModel
+          required
+          email
+          placeholder="name@example.com">
+        <label class="form-label" for="email">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          id="password"
+          ngModel
+          required
+          minlength="6"
+          placeholder="password">
+        <label class="form-label" for="password">Password</label>
+      </div>
+      <div class="d-flex justify-content-center flex-column align-items-center">
+        <button
+          class="btn btn-primary mb-3"
+          style="min-width: 120px"
+          type="submit"
+          [disabled]="!signInForm.valid">
+          <div *ngIf="isLogin then spinner;else text "></div>
+          <ng-template #spinner>
+            <div class="spinner-border text-info spinner-border-sm"></div>
+          </ng-template>
+          <ng-template #text>Login</ng-template>
+
+        </button>
+        <div class="text-muted">Not Registered? <a class="sign-up-link" href="#">Create an account</a></div>
+      </div>
+    </form>
+  </div>
+</div>
