@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../common/services/auth.service";
+import {Router} from "@angular/router";
+import {User} from "../../common/models/user.model";
 
 @Component({
   selector: 'app-sign-in-page',
@@ -8,10 +10,12 @@ import {AuthService} from "../../common/services/auth.service";
   styleUrls: ['./sign-in-page.component.css']
 })
 export class SignInPageComponent implements OnInit {
-  isLogin = false
-  constructor(private authService:AuthService) { }
+  isLogin:boolean = false;
+  error = null;
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    this.authService.autoLogin()
   }
 
   onSubmit(signInForm: NgForm) {
@@ -22,13 +26,31 @@ export class SignInPageComponent implements OnInit {
     const password = signInForm.value.password;
     this.isLogin =true;
     console.log("email: "+email+"\npass: "+ password);
-    this.authService.signIn(email,password);
+    const authObs = this.authService.signIn(email,password);
+    this.isLogin =true;
+    authObs.subscribe({
+      next: resData =>{
+        console.log(resData);
 
-    setTimeout(()=>{
-      this.isLogin =false;
-    },2000);
-
+        // User.init(resData.localId,resData.email,resData.idToken);
+        this.isLogin =false;
+        signInForm.reset();
+        this.router.navigate(['/home'])
+      },
+      error: errorMessage =>{
+        this.error=errorMessage;
+        console.log(errorMessage);
+        this.isLogin =false;
+        return;
+      }
+    });
 
 
   }
+
+  navigateToSignUp() {
+    this.router.navigate(['/sign-up'])
+  }
+
+
 }

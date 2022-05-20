@@ -1,1 +1,38 @@
-<p>todos-list works!</p>
+<div class="row">
+  <div class="col-12 mb-2">
+    <button class="btn btn-success" (click)="newTodo()">New Todo</button>
+  </div>
+  <hr>
+  <div *ngIf="loading then spinner;else list;"></div>
+  <ng-template #spinner>
+    <div class="d-flex justify-content-center align-items-center ">
+      <div class="spinner-border text-primary mt-5">
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #list>
+    <div class="row p-0 m-0">
+      <div class="col-xs-12 p-0 m-0">
+        <div *ngIf="todos.length == 0" #emptyList>
+          <div >
+            No Todos, Add new!
+            <img src="assets/imgs/add-todo.jpg" class="img-fluid">
+          </div>
+        </div>
+        <app-todo-item
+          *ngFor="let todo of todos;"
+          [todo]="todo"
+        ></app-todo-item>
+        <!--      <ul class="list-group">-->
+        <!--        <li class="list-group-item"-->
+        <!--            *ngFor="let todo of todos;">-->
+        <!--          <app-todo-item [todo]="todo"></app-todo-item>-->
+        <!--        </li>-->
+        <!--      </ul>-->
+      </div>
+    </div>
+  </ng-template>
+
+
+
+</div>

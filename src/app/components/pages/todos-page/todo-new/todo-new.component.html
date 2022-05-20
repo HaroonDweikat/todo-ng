@@ -1,0 +1,39 @@
+<form #todoForm="ngForm" (ngSubmit)="onSubmit(todoForm)">
+
+  <div class="m-4">
+
+    <div class="mb-3">
+      <label for="content">Description: </label>
+      <textarea
+        class="form-control"
+        id="content"
+        name="content"
+        rows="6"
+        ngModel
+        required
+        (change)="updateContent(content.value)"
+        placeholder="Todo Description ..."
+        #content
+      ></textarea>
+    </div>
+    <div class="mt-2">
+      <button
+        class="btn btn-primary me-2"
+        style="min-width: 120px"
+        type="submit"
+        [disabled]="!todoForm.valid && todoForm.touched">
+        <div *ngIf="waiting then spinner;else text "></div>
+        <ng-template #spinner>
+          <div class="spinner-border text-info spinner-border-sm"></div>
+        </ng-template>
+        <ng-template #text>Add New Todo</ng-template>
+
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </div>
+
+
+  </div>
+
+
+</form>

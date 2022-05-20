@@ -1,0 +1,11 @@
+.icon:hover{
+  color: green;
+}
+
+.text-overflow{
+  max-height: 32px;
+  /*white-space: ;*/
+  max-width: 90%;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}

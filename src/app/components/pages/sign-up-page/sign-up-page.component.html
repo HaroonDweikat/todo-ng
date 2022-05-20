@@ -1,1 +1,60 @@
-<p>sign-up-page works!</p>
+<div class="position-relative" style="height: 100vh; width: 100vw">
+  <div class="position-absolute top-50 start-50 translate-middle card p-4 form-width">
+    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+      <div class="form-floating mb-3 ">
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          id="email"
+          ngModel
+          required
+          email
+          placeholder="name@example.com">
+        <label class="form-label" for="email">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          id="password"
+          ngModel
+          required
+          minlength="6"
+          placeholder="password">
+        <label class="form-label" for="password">Password</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          ngModel
+          required
+          minlength="6"
+          placeholder="confirm-password">
+        <label class="form-label" for="confirmPassword">Confirm Password</label>
+      </div>
+      <div class="alert alert-danger" *ngIf="error">
+        <p>{{error}}</p>
+      </div>
+      <div class="d-flex justify-content-center flex-column align-items-center">
+        <button
+          class="btn btn-primary mb-3"
+          style="min-width: 120px"
+          type="submit"
+          [disabled]="!signUpForm.valid && signUpForm.touched">
+          <div *ngIf="isSignUp then spinner;else text "></div>
+          <ng-template #spinner>
+            <div class="spinner-border text-info spinner-border-sm"></div>
+          </ng-template>
+          <ng-template #text>Sign Up</ng-template>
+
+        </button>
+        <div class="text-muted">Registered? <a class="sign-up-link" style="cursor: pointer" (click)="navigateToSignIn()">Sign in</a></div>
+      </div>
+    </form>
+  </div>
+</div>

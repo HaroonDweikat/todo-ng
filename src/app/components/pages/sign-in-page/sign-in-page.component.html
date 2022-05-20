@@ -25,12 +25,16 @@
           placeholder="password">
         <label class="form-label" for="password">Password</label>
       </div>
+
+      <div class="alert alert-danger" *ngIf="error">
+        <p>{{error}}</p>
+      </div>
       <div class="d-flex justify-content-center flex-column align-items-center">
         <button
           class="btn btn-primary mb-3"
           style="min-width: 120px"
           type="submit"
-          [disabled]="!signInForm.valid">
+          [disabled]="!signInForm.valid && signInForm.touched">
           <div *ngIf="isLogin then spinner;else text "></div>
           <ng-template #spinner>
             <div class="spinner-border text-info spinner-border-sm"></div>
@@ -38,7 +42,7 @@
           <ng-template #text>Login</ng-template>
 
         </button>
-        <div class="text-muted">Not Registered? <a class="sign-up-link" href="#">Create an account</a></div>
+        <div class="text-muted">Not Registered? <a class="sign-up-link" style="cursor: pointer" (click)="navigateToSignUp()">Create an account</a></div>
       </div>
     </form>
   </div>

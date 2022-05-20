@@ -11,8 +11,8 @@ import {
 })
 export class AppComponent {
   title = 'todo-ng';
-  faCoffee = faCoffee;
-  farSquare=farSquare;
-  farCheckSquare=farCheckSquare;
+  // faCoffee = faCoffee;
+  // farSquare=farSquare;
+  // farCheckSquare=farCheckSquare;
 
 }
